@@ -1,0 +1,135 @@
+<div class="row">
+  <div class="col-md-6 col-lg-6 offset-md-3 offset-lg-3">
+    <form #form="ngForm" (ngSubmit) = "register()">
+      <section class="form-block">
+        <label>Create new account</label>
+
+        <div class="form-group">
+          <label for="firstName">First name</label>
+          <input type="text"
+                 class="form-control"
+                 placeholder="John"
+                 id="firstName"
+                 required
+                 name="firstName"
+                 [(ngModel)] = "registerBean.firstName"
+                 #firstName = "ngModel">
+          <span class="text-danger" *ngIf="firstName.touched && firstName.invalid">
+            This field cannot be empty!
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last name</label>
+          <input type="text"
+                 class="form-control"
+                 placeholder="Doe"
+                 id="lastName"
+                 required
+                 name="lastName"
+                 [(ngModel)] = "registerBean.lastName"
+                 #lastName = "ngModel">
+          <span class="text-danger" *ngIf="lastName.touched && lastName.invalid">
+            This field cannot be empty!
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email"
+                 class="form-control"
+                 placeholder="john_doe@example.com"
+                 id="email"
+                 required
+                 name="email"
+                 [(ngModel)] = "registerBean.email"
+                 #email = "ngModel">
+          <span class="text-danger" *ngIf="email.touched && email.invalid">
+            This field cannot be empty!
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password"
+                 class="form-control"
+                 id="password"
+                 placeholder="Minimum 6 characters"
+                 required
+                 name="password"
+                 [(ngModel)] = "registerBean.password"
+                 #password = "ngModel"
+                 minlength="6">
+          <span class="text-danger" *ngIf="password.touched && password.errors?.required">
+            This field cannot be empty!
+          </span>
+          <span class="text-danger" *ngIf="password.touched && password.errors?.minlength">
+            Must be atleast 6 characters!
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm password</label>
+          <input type="password"
+                 class="form-control"
+                 id="confirmPassword"
+                 required name="confirmPassword"
+                 [(ngModel)] = "registerBean.confirmPassword"
+                 #confirmPassword = "ngModel">
+          <span class="text-danger" *ngIf="confirmPassword.touched && confirmPassword.invalid">
+            This field cannot be empty!
+          </span>
+          <span class="text-danger" *ngIf="confirmPassword.touched && password.value !== confirmPassword.value">
+            Passwords don't match
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="dateOfBirth">Date of birth</label>
+          <input type="date"
+                 class="form-control"
+                 id="dateOfBirth"
+                 required name="dateOfBirth"
+                 [(ngModel)] = "registerBean.dateOfBirth"
+                 #dateOfBirth="ngModel">
+          <span class="text-danger" *ngIf="dateOfBirth.touched && dateOfBirth.invalid">
+            This field cannot be empty!
+          </span>
+          <span class="text-danger" *ngIf="dateOfBirth.touched && !isValidDate() && dateOfBirth.dirty">
+            Must be a proper date!
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label>Gender</label>
+          <div class="radio-inline">
+            <input type="radio" name="gender" id="male" checked value="male" [(ngModel)]="registerBean.gender">
+            <label for="male">Male</label>
+          </div>
+          <div class="radio-inline">
+            <input type="radio" name="gender" id="female" value="female" [(ngModel)]="registerBean.gender">
+            <label for="female">Female</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone number</label>
+          <input type="tel"
+                 class="form-control"
+                 id="phone"
+                 required
+                 name="phone"
+                 [(ngModel)] = "registerBean.phone"
+                 #phone="ngModel">
+          <span class="text-danger" *ngIf="phone.touched && phone.invalid">
+            This field cannot be empty!
+          </span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid || password.value !== confirmPassword.value || !isValidDate()">Register</button>
+
+      </section>
+    </form>
+  </div>
+</div>
+{{registerBean | json}}
