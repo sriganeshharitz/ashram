@@ -12,6 +12,8 @@ import {NotFoundComponent} from './components/not-found/not-found.component';
 import {RegistrationFormComponent} from './components/registration-form/registration-form.component';
 import {LoginFormComponent} from './components/login-form/login-form.component';
 import {FormsModule} from '@angular/forms';
+import {CustomFormsModule} from 'ng2-validation';
+import {DateFormatter} from '@angular/common/src/pipes/deprecated/intl';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import {FormsModule} from '@angular/forms';
     BrowserModule,
     ClarityModule,
     RouterModule.forRoot(ROUTES),
-    FormsModule
+    FormsModule,
+    CustomFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

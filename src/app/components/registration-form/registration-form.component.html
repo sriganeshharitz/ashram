@@ -43,10 +43,12 @@
                  required
                  name="email"
                  [(ngModel)] = "registerBean.email"
-                 #email = "ngModel">
-          <span class="text-danger" *ngIf="email.touched && email.invalid">
-            This field cannot be empty!
-          </span>
+                 #email = "ngModel"
+                 email>
+          <div class="text-danger" *ngIf="email.touched && email.invalid">
+            <div *ngIf="email.errors.required">This field cannot be empty!</div>
+            <div *ngIf="email.errors.email && !email.errors.required">Not a valid email!</div>
+          </div>
         </div>
 
         <div class="form-group">
@@ -60,12 +62,10 @@
                  [(ngModel)] = "registerBean.password"
                  #password = "ngModel"
                  minlength="6">
-          <span class="text-danger" *ngIf="password.touched && password.errors?.required">
-            This field cannot be empty!
-          </span>
-          <span class="text-danger" *ngIf="password.touched && password.errors?.minlength">
-            Must be atleast 6 characters!
-          </span>
+          <div class="text-danger" *ngIf="password.touched && password.invalid">
+            <div *ngIf="password.errors.required">This field cannot be empty!</div>
+            <div *ngIf="password.errors.minlength">Must be atleast 6 characters!</div>
+          </div>
         </div>
 
         <div class="form-group">
@@ -75,13 +75,11 @@
                  id="confirmPassword"
                  required name="confirmPassword"
                  [(ngModel)] = "registerBean.confirmPassword"
-                 #confirmPassword = "ngModel">
-          <span class="text-danger" *ngIf="confirmPassword.touched && confirmPassword.invalid">
-            This field cannot be empty!
-          </span>
-          <span class="text-danger" *ngIf="confirmPassword.touched && password.value !== confirmPassword.value">
-            Passwords don't match
-          </span>
+                 #confirmPassword = "ngModel" [equalTo]="password">
+          <div class="text-danger" *ngIf="confirmPassword.touched && confirmPassword.invalid">
+            <div *ngIf="confirmPassword.errors.required">This field cannot be empty!</div>
+            <div *ngIf="confirmPassword.errors.equalTo">Password's don't match</div>
+          </div>
         </div>
 
         <div class="form-group">
@@ -89,17 +87,17 @@
           <input type="date"
                  class="form-control"
                  id="dateOfBirth"
-                 required name="dateOfBirth"
+                 required
+                 name="dateOfBirth"
                  [(ngModel)] = "registerBean.dateOfBirth"
                  #dateOfBirth="ngModel">
-          <span class="text-danger" *ngIf="dateOfBirth.touched && dateOfBirth.invalid">
-            This field cannot be empty!
-          </span>
-          <span class="text-danger" *ngIf="dateOfBirth.touched && !isValidDate() && dateOfBirth.dirty">
-            Must be a proper date!
-          </span>
+          <div class="text-danger" *ngIf="dateOfBirth.touched && dateOfBirth.invalid">
+            <div *ngIf="dateOfBirth.errors.required">This field cannot be empty!</div>
+          </div>
+          <div class="text-danger" *ngIf="dateOfBirth.touched && !isValidDate() && !dateOfBirth?.errors?.required">
+            <div>Must be a proper date!</div>
+          </div>
         </div>
-
         <div class="form-group">
           <label>Gender</label>
           <div class="radio-inline">
@@ -126,10 +124,9 @@
           </span>
         </div>
 
-        <button type="submit" class="btn btn-primary" [disabled]="form.invalid || password.value !== confirmPassword.value || !isValidDate()">Register</button>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid || !isValidDate()">Register</button>
 
       </section>
     </form>
   </div>
 </div>
-{{registerBean | json}}

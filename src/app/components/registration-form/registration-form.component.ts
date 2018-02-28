@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {RegisterBean} from '../../model/register-bean';
+import {DatePipe} from '@angular/common';
+import {isDate} from 'ng2-validation/dist/util/lang';
+
 
 @Component({
   selector: 'app-registration-form',
@@ -8,13 +11,13 @@ import {RegisterBean} from '../../model/register-bean';
 })
 export class RegistrationFormComponent implements OnInit {
   registerBean: RegisterBean = new RegisterBean();
-  constructor() { }
+  constructor() {
+  }
   ngOnInit() {
   }
   register() {
   }
   isValidDate() {
-    console.log('inside is valid date');
     if (this.registerBean.dateOfBirth) {
       return (Date.parse(this.registerBean.dateOfBirth) - Date.now() <= 0);
     }
