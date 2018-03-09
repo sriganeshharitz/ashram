@@ -7,4 +7,6 @@ export class RegisterBean {
   dateOfBirth: string;
   gender = 'male';
   phone: string;
+  // hasBeenToAshram: string;
+  // numberOfVisits: number;
 }
