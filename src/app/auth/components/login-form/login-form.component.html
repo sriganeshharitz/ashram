@@ -42,7 +42,16 @@
 
         <div class="row">
           <div class="col-lg-8">
-            <button class="btn btn-primary btn-block" [disabled] = "form.invalid">Login</button>
+            <button class="btn btn-primary" [disabled] = "form.invalid">Login</button>
+            <span class="spinner spinner-inline" *ngIf="startLoading$ | async">
+          Loading...
+          </span>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="errorMessage$ | async as msg">
+          <div class="col-md-8 col-lg-8 text-danger">
+            {{msg}}
           </div>
         </div>
 

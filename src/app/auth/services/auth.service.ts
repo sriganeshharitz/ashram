@@ -15,14 +15,13 @@ export class AuthService {
     return this.http.post(
       CREATE_USER,
       JSON.stringify(registerBean),
-      {headers: {'Content-Type' : 'application/json'}})
-      .pipe(
-        // retry( 3),
-        catchError(this.handleErrors)
-      );
+      {headers: {'Content-Type' : 'application/json'}});
   }
   login(loginBean) {
-    return this.http.post(LOGIN_USER, JSON.stringify(loginBean));
+    return this.http.post(
+      LOGIN_USER,
+      JSON.stringify(loginBean),
+      {headers: {'Content-Type' : 'application/json'}});
   }
   logout() {
   }
@@ -33,7 +32,7 @@ export class AuthService {
     if (response instanceof ErrorEvent) {
       console.error('Client side error and error is ' + response.error);
     } else {
-      console.error('Server side error and code is ' + response.status);
+      console.error('Server side error and code is ' + (response.message));
       console.error('Server side error and error is ' + response.error);
     }
     return new ErrorObservable('Oops something bad happened, try again');

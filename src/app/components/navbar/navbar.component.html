@@ -6,19 +6,19 @@
         <span class="title">Om Swami Ashram</span>
       </a>
     </div>
-    <div class="header-nav" [clr-nav-level]="1">
+    <div class="header-nav" [clr-nav-level]="1" *ngIf="!(user$ | async)">
       <a routerLink="/register" class="nav-link"><span class="nav-text">Register</span></a>
       <a routerLink="/login" class="nav-link"><span class="nav-text">Login</span></a>
     </div>
-    <div class="header-actions" style="position: absolute; right: 0;">
+    <div class="header-actions" style="position: absolute; right: 0;" *ngIf="user$ | async as user">
       <clr-dropdown>
         <button class="nav-text" clrDropdownTrigger>
-          username
+          {{user.email}}
           <clr-icon shape="caret down"></clr-icon>
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-          <a href="..." clrDropdownItem>Preferences</a>
-          <a href="..." clrDropdownItem>Log out</a>
+          <a clrDropdownItem>Profile</a>
+          <a clrDropdownItem (click)="logout()">Log out</a>
         </clr-dropdown-menu>
       </clr-dropdown>
     </div>
