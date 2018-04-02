@@ -4,5 +4,20 @@
     <div class="content-area">
       <router-outlet></router-outlet>
     </div>
+    <!-- <nav class="sidenav" [clr-nav-level]="2" *ngIf="user$ | async as user"> -->
+    <!-- <nav class="sidenav" [clr-nav-level]="2">
+      <section class="sidenav-content">
+        <section class="nav-group collapsible">
+          <input id="tabexample1" type="checkbox">
+          <label for="tabexample1">Sriganesh</label>
+          <ul class="nav-list" id="sidenav">
+            <li><a class="nav-link bg" routerLink="/profile" (click)="addActiveClass(dashboard)" #dashboard>Dashboard</a></li>
+            <li><a class="nav-link bg" routerLink="/edit-profile" (click)="addActiveClass(edit)" #edit>Edit Profile</a></li>
+            <li><a class="nav-link" routerLink="/relatives" (click)="addActiveClass(relative)"#relative>Add a relative</a></li>
+            <li><a class="nav-link" (click)="logout()">Logout</a></li>
+          </ul>
+        </section>
+      </section>
+    </nav> -->
   </div>
 </clr-main-container>

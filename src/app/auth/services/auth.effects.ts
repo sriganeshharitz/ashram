@@ -67,7 +67,7 @@ export class AuthEffects {
     @Effect({ dispatch: false })
     logout: Observable<Action> = this.actions$.pipe(
         ofType(fromAuthActions.LOGOUT),
-        tap(success => this.router.navigateByUrl('/home'))
+        tap(success => this.router.navigateByUrl('/logout'))
     );
 }
 

@@ -7,8 +7,6 @@ import {RouterModule} from '@angular/router';
 import {ROUTES} from './routes';
 import {HomeComponent} from './components/home/home.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
-import {RegistrationFormComponent} from './auth/components/registration-form/registration-form.component';
-import {LoginFormComponent} from './auth/components/login-form/login-form.component';
 import {FormsModule} from '@angular/forms';
 import {CustomFormsModule} from 'ng2-validation';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -22,7 +20,9 @@ import { reducers } from './store/reducers';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects/';
 import { AuthEffects } from './auth/services/auth.effects';
-import { RegistrationSuccessComponent } from './auth/components/registration-success/registration-success.component';
+import { AuthModule } from './auth/auth.module';
+import { UserComponent } from './components/user/user.component';
+import { RelativesComponent } from './components/relatives/relatives.component';
 
 
 @NgModule({
@@ -31,10 +31,9 @@ import { RegistrationSuccessComponent } from './auth/components/registration-suc
     NavbarComponent,
     HomeComponent,
     NotFoundComponent,
-    RegistrationFormComponent,
-    LoginFormComponent,
     TestComponent,
-    RegistrationSuccessComponent
+    UserComponent,
+    RelativesComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +46,8 @@ import { RegistrationSuccessComponent } from './auth/components/registration-suc
     MdComponentsModule,
     HttpClientModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects]),
+    AuthModule
   ],
   providers: [
     AuthService,

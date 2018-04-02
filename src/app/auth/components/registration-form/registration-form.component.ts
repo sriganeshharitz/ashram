@@ -10,6 +10,7 @@ import * as fromRoot from '../../../store/reducers';
 import * as fromAuthActions from '../../store/auth-actions';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+import { NgModel } from '@angular/forms/forms';
 
 @Component({
   selector: 'app-registration-form',
@@ -24,7 +25,7 @@ export class RegistrationFormComponent {
   startLoading$: Observable<boolean>;
   constructor(private auth: AuthService, private store: Store<fromRoot.State>, private router: Router) {
     this.errorMessage$ = this.store.select(
-      (state: fromRoot.State) => state.auth.errorMessage
+      (state: fromRoot.State) => state.auth.registerErrorMessage
     );
     this.startLoading$ = this.store.select(
       (state: fromRoot.State) => state.auth.startLoading
