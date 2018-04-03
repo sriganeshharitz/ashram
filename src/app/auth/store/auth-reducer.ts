@@ -6,6 +6,8 @@ export interface State {
     registerErrorMessage: string;
     editErrorMessage: string;
     startLoading: boolean;
+    sbaId: string;
+    token: string;
 }
 
 const initialState: State = {
@@ -13,7 +15,9 @@ const initialState: State = {
     loginErrorMessage: null,
     registerErrorMessage: null,
     editErrorMessage: null,
-    startLoading: false
+    startLoading: false,
+    sbaId: null,
+    token: localStorage.getItem('token')
 };
 
 export function authReducer(state: State = initialState, action: fromAuthActions.AuthActions): State {
@@ -28,7 +32,8 @@ export function authReducer(state: State = initialState, action: fromAuthActions
             return {
                 ...state,
                 startLoading: false,
-                registerErrorMessage: null
+                registerErrorMessage: null,
+                sbaId: action.payload.data.sbaId
             };
         }
         case fromAuthActions.REGISTRATION_FAILED: {
@@ -57,7 +62,15 @@ export function authReducer(state: State = initialState, action: fromAuthActions
                 ...state,
                 startLoading: false,
                 loginErrorMessage: null,
-                user: new AppUser(action.payload.data.email, action.payload.data.fname, action.payload.data.lname)
+                user: new AppUser(
+                    action.payload.data.email,
+                    action.payload.data.fname,
+                    action.payload.data.lname,
+                    action.payload.data.sbaId,
+                    action.payload.data.address,
+                    action.payload.data.mobileNum,
+                    action.payload.data.relativeList,
+                    action.payload.data.gender===1?'male':'female',new Date(action.payload.data.dob))
             };
         }
         case fromAuthActions.LOGIN_FAILED: {

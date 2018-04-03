@@ -1,6 +1,9 @@
 import { RegisterBean } from '../../model/register-bean';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs/Observable";
+import { AppUser } from '../../model/app-user';
+import * as fromRoot from '../../../store/reducers';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-edit-profile',
@@ -9,15 +12,20 @@ import { Observable } from "rxjs/Observable";
 })
 export class EditProfileComponent implements OnInit {
   errorMessage$: Observable<string>;
-  registerBean: RegisterBean = new RegisterBean();
-  constructor() {
-    this.registerBean.firstName = 'Sriganesh';
-    this.registerBean.lastName = 'Nagaraj';
-    this.registerBean.email = 'sriganesh@gmail.com';
-    this.registerBean.phone = '9778778914';
-   }
+  registerBean$: Observable<AppUser>;
+  constructor(private store: Store<fromRoot.State>) {
+    this.registerBean$ = this.store.select(
+      (state: fromRoot.State) => state.auth.user
+    );
+    
+    this.errorMessage$ = this.store.select(
+      (state: fromRoot.State) => state.auth.editErrorMessage
+    );
+  }
 
   ngOnInit() {
   }
-
+  edit(obj) {
+    console.log(obj);
+  }
 }

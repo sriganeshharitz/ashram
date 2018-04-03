@@ -38,7 +38,9 @@ export class LoginFormComponent implements OnInit {
     let bean: Bean | BeanSBA | BeanPhone;
     const expression = /\S+@\S+\.\S+/;
     if (expression.test(id)) {
-      bean = new Bean(id, this.loginBean.password);
+      bean = new Bean();
+      bean.email = id;
+      bean.password = this.loginBean.password;
       console.log(bean);
       return bean;
     } else if (id.toUpperCase().startsWith('SBA')) {

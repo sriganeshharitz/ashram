@@ -32,14 +32,17 @@ export class RegistrationFormComponent {
     );
   }
   register() {
-    console.log('inside register');
+    console.log('inside register ' + this.registerBean.dateOfBirth.getTime());
     this.store.dispatch(
       new fromAuthActions.Register(
         new Bean(
-          this.registerBean.email,
-          this.registerBean.password,
           this.registerBean.firstName,
           this.registerBean.lastName,
-          this.registerBean.phone)));
+          this.registerBean.email,
+          this.registerBean.password,
+          this.registerBean.phone,
+          'blah',
+          this.registerBean.gender==='male'? 1 : 0,
+          this.registerBean.dateOfBirth.getMilliseconds())));
   }
 }

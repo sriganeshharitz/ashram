@@ -13,6 +13,8 @@ import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/concatMap';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
+import { HttpResponse } from '@angular/common/http';
+
 
 
 @Injectable()
@@ -25,9 +27,10 @@ export class AuthEffects {
         map((action: fromAuthActions.Register) => action.payload),
         concatMap((bean: Bean) => this.authService.register(bean).pipe(
             map((response: AppResponse) => {
-                if (response.errorCode === 0) {
+                if (response.status === 0) {
                     return new fromAuthActions.RegistrationSuccess(response);
                 } else {
+                    console.log('blah');
                     return new fromAuthActions.RegistrationFailed(response);
                 }
             }
@@ -41,14 +44,16 @@ export class AuthEffects {
         ofType(fromAuthActions.ATTEMPT_LOGIN),
         map((action: fromAuthActions.AttemptLogin) => action.payload),
         concatMap((bean: Bean) => this.authService.login(bean).pipe(
-            map((response: AppResponse) => {
-                if (response.errorCode === 0) {
-                    return new fromAuthActions.LoginSuccessful(response);
-                } else {
-                    return new fromAuthActions.LoginFailed(response);
+            map((response: HttpResponse<AppResponse>) => {
+                if (response.body.status === 0) {
+                    localStorage.setItem('token', response.body.message);
+                    return new fromAuthActions.LoginSuccessful(response.body);
+                } else { 
+                    console.log('login failed ' + response.body.message + response.headers.keys());
+                    return new fromAuthActions.LoginFailed(response.body);
                 }
             }),
-            catchError(err => of(new fromAuthActions.LoginFailed({message: 'Oops something happened! Please try again'})))
+            catchError((err) => of(new fromAuthActions.LoginFailed({message: 'Oops something happened! Please try again'})))
         ))
     );
 

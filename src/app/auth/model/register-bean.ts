@@ -4,7 +4,7 @@ export class RegisterBean {
   email: string;
   password: string;
   confirmPassword: string;
-  dateOfBirth: string;
+  dateOfBirth: Date;
   gender = 'male';
   phone: string;
   // hasBeenToAshram: string;

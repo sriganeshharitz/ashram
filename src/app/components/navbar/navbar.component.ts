@@ -11,6 +11,7 @@ import * as fromAuthActions from '../../auth/store/auth-actions';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  selected: HTMLAnchorElement;
   user$: Observable<AppUser>;
   constructor(private store: Store<fromRoot.State>) {
     this.user$ = this.store.select(
@@ -22,5 +23,11 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.store.dispatch(new fromAuthActions.Logout());
   }
-
+  addActiveClass(selectedLink: HTMLAnchorElement) {
+    if (this.selected) {
+      this.selected.classList.remove('active');
+    }
+    this.selected = selectedLink;
+    selectedLink.classList.add('active');
+  }
 }

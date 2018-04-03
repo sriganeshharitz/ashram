@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row" *ngIf="registerBean$ | async as registerBean">
     <div class="col-md-6 col-lg-6 offset-md-3 offset-lg-3">
-        <form #form="ngForm" (ngSubmit)="register()">
+        <form #form="ngForm" (ngSubmit)="edit(form.value)">
             <section class="form-block">
                 <label>Edit Profile</label>
 
@@ -9,7 +9,7 @@
                         <label for="firstName">First name</label>
                     </div>
                     <div class="col-md-8 col-lg-8">
-                        <input type="text" class="form-control" placeholder="John" id="firstName" required name="firstName" [(ngModel)]="registerBean.firstName"
+                        <input type="text" class="form-control" placeholder="John" id="firstName" required name="fname" [(ngModel)]="registerBean.firstName"
                             #firstName="ngModel">
                         <span class="text-danger" *ngIf="firstName.touched && firstName.invalid">
             This field cannot be empty!
@@ -23,7 +23,7 @@
                         <label for="lastName">Last name</label>
                     </div>
                     <div class="col-md-8 col-lg-8">
-                        <input type="text" class="form-control" placeholder="Doe" id="lastName" required name="lastName" [(ngModel)]="registerBean.lastName"
+                        <input type="text" class="form-control" placeholder="Doe" id="lastName" required name="lname" [(ngModel)]="registerBean.lastName"
                             #lastName="ngModel">
                         <span class="text-danger" *ngIf="lastName.touched && lastName.invalid">
             This field cannot be empty!
@@ -114,7 +114,7 @@
                     <div class="col-lg-8 col-md-4">
                         <mat-form-field>
                             <input matInput [matDatepicker]="picker" [(ngModel)]="registerBean.dateOfBirth" #dateOfBirth="ngModel" [max]="maxDate" required
-                                name="dateOfBirth" placeholder="dd/mm/yyyy">
+                                name="dob" placeholder="dd/mm/yyyy">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
@@ -129,7 +129,7 @@
                         <label for="phone">Phone number</label>
                     </div>
                     <div class="col-md-8 col-lg-8">
-                        <input type="tel" class="form-control" id="phone" required name="phone" [(ngModel)]="registerBean.phone" #phone="ngModel">
+                        <input type="tel" class="form-control" id="phone" required name="mobileNum" [(ngModel)]="registerBean.phone" #phone="ngModel">
                         <span class="text-danger" *ngIf="phone.touched && phone.invalid">
             This field cannot be empty!
           </span>
@@ -175,16 +175,12 @@
         </span>
 
 
-                <!-- <div class="row" *ngIf="errorMessage$ | async as msg">
+                <div class="row" *ngIf="errorMessage$ | async as msg">
                     <div class="col-md-12 col-lg-12 text-danger">
                         {{msg}}
                     </div>
-                </div> -->
-                <div class="row">
-                    <div class="col-md-12 col-lg-12 text-danger">
-                        Oops something happened! Please try again.
-                    </div>
                 </div>
+                
             </section>
         </form>
     </div>
