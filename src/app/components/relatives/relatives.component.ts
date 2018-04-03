@@ -10,9 +10,12 @@ import { Observable } from "rxjs/Observable";
 export class RelativesComponent implements OnInit {
   errorMessage$: Observable<string>;
   registerBean: RegisterBean = new RegisterBean();
+  startLoading$: Observable<boolean>;
+  maxDate = new Date();
   constructor() { }
 
   ngOnInit() {
   }
-
+  add() {
+  }
 }

@@ -1,14 +1,10 @@
 <div class="row">
   <div class="col-lg-3 col-md-3">
-    <p>Found 2 relatives:</p>
-    <ol>
-      <li>Nagaraj</li>
-      <li>Rajashree</li>
-    </ol>
+    <p>Found 0 relatives:</p>
   </div>
 
   <div class="col-md-9 col-lg-9">
-    <form #form="ngForm" (ngSubmit)="register()">
+    <form #form="ngForm" (ngSubmit)="add()">
       <section class="form-block">
         <label>Add a relative</label>
 
@@ -111,11 +107,6 @@
         <div class="row" *ngIf="errorMessage$ | async as msg">
           <div class="col-md-12 col-lg-12 text-danger">
             {{msg}}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 col-lg-12 text-danger">
-            Oops! Something happened. Please try again.
           </div>
         </div>
       </section>
