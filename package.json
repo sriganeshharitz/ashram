@@ -23,6 +23,7 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
+    "@auth0/angular-jwt": "^1.1.0",
     "@clr/angular": "^0.11.0",
     "@clr/icons": "^0.11.0",
     "@clr/ui": "^0.11.0",

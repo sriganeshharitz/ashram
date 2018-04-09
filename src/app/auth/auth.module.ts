@@ -9,6 +9,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { FormsModule } from '@angular/forms';
 import { LogoutSuccessComponent } from './components/logout-success/logout-success.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { EditProfileSuccessComponent } from './components/edit-profile-success/edit-profile-success.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     LoginFormComponent,
     RegistrationSuccessComponent,
     LogoutSuccessComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    EditProfileSuccessComponent
   ],
   exports: [
   ]

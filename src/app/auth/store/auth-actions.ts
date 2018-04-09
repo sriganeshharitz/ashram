@@ -3,6 +3,7 @@ import { AppResponse } from '../../model/app-response';
 import { Action } from '@ngrx/store';
 import { BeanPhone } from '../model/bean-phone';
 import { BeanSBA } from '../model/bean-sba';
+import { Relative } from '../model/relative';
 
 
 
@@ -22,6 +23,8 @@ export const EDIT_FAILED = 'EDIT_FAILED';
 export const ATTEMPT_ADDING_A_RELATIVE = 'ATTEMPT_ADDING_A_RELATIVE';
 export const RELATIVE_ADDITION_SUCCESSFUL = 'RELATIVE_ADDITION_SUCCESSFUL';
 export const RELATIVE_ADDITION_FAILED = 'RELATIVE_ADDITION_FAILED';
+
+export const RESET_ERROR_MESSAGES = 'RESET_ERROR_MESSAGES';
 
 export class Register implements Action {
     readonly type = ATTEMPT_REGISTRATION;
@@ -78,6 +81,22 @@ export class EditFailed implements Action {
     constructor(public payload: AppResponse) {}
 }
 
+export class ResetErrorMessages implements Action {
+    readonly type = RESET_ERROR_MESSAGES;
+}
+
+export class AttemptAddingARelative implements Action {
+    readonly type = ATTEMPT_ADDING_A_RELATIVE;
+    constructor(public payload: Relative) {}
+}
+export class RelativeAdditionSuccessful implements Action {
+    readonly type = RELATIVE_ADDITION_SUCCESSFUL;
+    constructor(public payload: AppResponse) {}
+}
+export class RelativeAdditionFailed implements Action {
+    readonly type = RELATIVE_ADDITION_FAILED;
+    constructor(public payload: AppResponse) {}
+}
 export type AuthActions =
 Register |
 RegistrationSuccess |
@@ -86,4 +105,11 @@ RedirectedAfterRegistration|
 AttemptLogin|
 LoginSuccessful|
 LoginFailed|
-Logout| AttemptEdit | EditFailed | EditSuccessful;
+Logout|
+AttemptEdit|
+EditFailed|
+EditSuccessful|
+ResetErrorMessages|
+AttemptAddingARelative|
+RelativeAdditionSuccessful|
+RelativeAdditionFailed;

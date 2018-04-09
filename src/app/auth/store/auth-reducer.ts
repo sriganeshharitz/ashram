@@ -1,20 +1,25 @@
 import { AppUser } from '../model/app-user';
 import * as fromAuthActions from './auth-actions';
+import { Relative } from '../model/relative';
 export interface State {
     user: AppUser;
     loginErrorMessage: string;
     registerErrorMessage: string;
     editErrorMessage: string;
+    addRelativeErrorMessage: string;
+    addRelativeSuccessMessage: string;
     startLoading: boolean;
     sbaId: string;
     token: string;
 }
 
 const initialState: State = {
-    user: null,
+    user: JSON.parse(localStorage.getItem('user')),
     loginErrorMessage: null,
     registerErrorMessage: null,
     editErrorMessage: null,
+    addRelativeErrorMessage: null,
+    addRelativeSuccessMessage: null,
     startLoading: false,
     sbaId: null,
     token: localStorage.getItem('token')
@@ -70,7 +75,7 @@ export function authReducer(state: State = initialState, action: fromAuthActions
                     action.payload.data.address,
                     action.payload.data.mobileNum,
                     action.payload.data.relativeList,
-                    action.payload.data.gender===1?'male':'female',new Date(action.payload.data.dob))
+                    action.payload.data.gender === 1 ? 'male' : 'female', new Date(action.payload.data.dob))
             };
         }
         case fromAuthActions.LOGIN_FAILED: {
@@ -96,7 +101,16 @@ export function authReducer(state: State = initialState, action: fromAuthActions
             return {
                 ...state,
                 startLoading: false,
-                editErrorMessage: null
+                editErrorMessage: null,
+                user: new AppUser(
+                    action.payload.data.email,
+                    action.payload.data.fname,
+                    action.payload.data.lname,
+                    action.payload.data.sbaId,
+                    action.payload.data.address,
+                    action.payload.data.mobileNum,
+                    action.payload.data.relativeList,
+                    action.payload.data.gender === 1 ? 'male' : 'female', new Date(action.payload.data.dob))
             };
         }
         case fromAuthActions.EDIT_FAILED: {
@@ -104,7 +118,42 @@ export function authReducer(state: State = initialState, action: fromAuthActions
                 ...state,
                 startLoading: false,
                 editErrorMessage: action.payload.message
-            }
+            };
+        }
+        case fromAuthActions.RESET_ERROR_MESSAGES: {
+            return {
+                ...state,
+                registerErrorMessage: null,
+                editErrorMessage: null,
+                addRelativeErrorMessage: null
+            };
+        }
+        case fromAuthActions.ATTEMPT_ADDING_A_RELATIVE: {
+            return {
+                ...state,
+                startLoading: true,
+            };
+        }
+        case fromAuthActions.RELATIVE_ADDITION_SUCCESSFUL: {
+            const relative: Relative = {...action.payload.data};
+            return {
+                ...state,
+                startLoading: false,
+                addRelativeErrorMessage: null,
+                addRelativeSuccessMessage: 'Added a relative',
+                user: {
+                    ...state.user,
+                    relatives: action.payload.data.relativeList
+                }
+            };
+        }
+        case fromAuthActions.RELATIVE_ADDITION_FAILED: {
+            return {
+                ...state,
+                startLoading: false,
+                addRelativeErrorMessage: action.payload.message,
+                addRelativeSuccessMessage: null
+            };
         }
         default: {
             return state;

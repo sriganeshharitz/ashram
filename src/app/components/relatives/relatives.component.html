@@ -1,10 +1,17 @@
-<div class="row">
-  <div class="col-lg-3 col-md-3">
-    <p>Found 0 relatives:</p>
+<div class="row" *ngIf="user$ | async as user">
+  <div class="col-lg-3 col-md-3" *ngIf="user.relatives">
+    <p>Found {{user.relatives.length}} relative(s):</p>
+    <ol>
+      <li *ngFor="let relative of user.relatives">{{relative.fName}}</li>
+    </ol>
+  </div>
+  <div class="col-lg-3 col-md-3" *ngIf="!user.relatives">
+    <p>Found 0 relatives</p>
+    
   </div>
 
   <div class="col-md-9 col-lg-9">
-    <form #form="ngForm" (ngSubmit)="add()">
+    <form #form="ngForm" (ngSubmit)="add(form.value)">
       <section class="form-block">
         <label>Add a relative</label>
 
@@ -13,7 +20,7 @@
             <label for="firstName">First name</label>
           </div>
           <div class="col-md-8 col-lg-8">
-            <input type="text" class="form-control" placeholder="John" id="firstName" required name="firstName" [(ngModel)]="registerBean.firstName"
+            <input type="text" class="form-control" placeholder="John" id="firstName" required name="fName" [(ngModel)]="registerBean.firstName"
               #firstName="ngModel">
             <span class="text-danger" *ngIf="firstName.touched && firstName.invalid">
             This field cannot be empty!
@@ -27,7 +34,7 @@
             <label for="lastName">Last name</label>
           </div>
           <div class="col-md-8 col-lg-8">
-            <input type="text" class="form-control" placeholder="Doe" id="lastName" required name="lastName" [(ngModel)]="registerBean.lastName"
+            <input type="text" class="form-control" placeholder="Doe" id="lastName" required name="lName" [(ngModel)]="registerBean.lastName"
               #lastName="ngModel">
             <span class="text-danger" *ngIf="lastName.touched && lastName.invalid">
             This field cannot be empty!
@@ -40,8 +47,11 @@
             <label for="relationship">Relationship</label>
           </div>
           <div class="col-md-8 col-lg-8">
-            <input type="text" class="form-control"  id="relationship" required name="relationship" 
-              >
+            <input type="text" class="form-control"  id="relationship" required name="relationship" [(ngModel)]="registerBean.relationship"
+             #relationship="ngModel">
+             <span class="text-danger" *ngIf="relationship.touched && relationship.invalid">
+               This field cannot be empty!
+             </span>
           </div>
         </div>
 
@@ -50,12 +60,8 @@
             <label for="email">Email(optional)</label>
           </div>
           <div class="col-md-8 col-lg-8">
-            <input type="email" class="form-control" placeholder="john_doe@example.com" id="email" required name="email" [(ngModel)]="registerBean.email"
-              #email="ngModel" email>
-            <div class="text-danger" *ngIf="email.touched && email.invalid">
-              <div *ngIf="email.errors.required">This field cannot be empty!</div>
-              <div *ngIf="email.errors.email && !email.errors.required">Not a valid email!</div>
-            </div>
+            <input type="email" class="form-control" placeholder="john_doe@example.com" id="email" name="email" [(ngModel)]="registerBean.email"
+              #email="ngModel">
           </div>
         </div>
 
@@ -83,7 +89,7 @@
           <div class="col-lg-8 col-md-4">
             <mat-form-field>
               <input matInput [matDatepicker]="picker" [(ngModel)]="registerBean.dateOfBirth" #dateOfBirth="ngModel" [max]="maxDate" required
-                name="dateOfBirth" placeholder="dd/mm/yyyy">
+                name="dob" placeholder="dd/mm/yyyy">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -106,6 +112,11 @@
 
         <div class="row" *ngIf="errorMessage$ | async as msg">
           <div class="col-md-12 col-lg-12 text-danger">
+            {{msg}}
+          </div>
+        </div>
+        <div class="row" *ngIf="successMessage$ | async as msg">
+          <div class="col-md-12 col-lg-12 text-success">
             {{msg}}
           </div>
         </div>

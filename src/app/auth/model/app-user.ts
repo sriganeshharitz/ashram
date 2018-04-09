@@ -1,3 +1,5 @@
+import { Relative } from './relative';
+
 export class AppUser {
     constructor(
         public email?: string,
@@ -6,7 +8,7 @@ export class AppUser {
         public sbaId?: string,
         public address?: string,
         public phone?: string,
-        public relatives?: string[],
+        public relatives?: Relative[],
         public gender?: string,
         public dateOfBirth?: Date) {
     }

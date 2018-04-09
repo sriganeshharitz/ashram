@@ -17,7 +17,7 @@ import { NgModel } from '@angular/forms/forms';
   templateUrl: './registration-form.component.html',
   styleUrls: ['./registration-form.component.css']
 })
-export class RegistrationFormComponent {
+export class RegistrationFormComponent implements OnDestroy{
   errorMessage$: Observable<string>;
   registeredSuccessfullySubscription: Subscription;
   registerBean: RegisterBean = new RegisterBean();
@@ -44,5 +44,9 @@ export class RegistrationFormComponent {
           'blah',
           this.registerBean.gender==='male'? 1 : 0,
           this.registerBean.dateOfBirth.getMilliseconds())));
+  }
+
+  ngOnDestroy(): void {
+    this.store.dispatch(new fromAuthActions.ResetErrorMessages());
   }
 }

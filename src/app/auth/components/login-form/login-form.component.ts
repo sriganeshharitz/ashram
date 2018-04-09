@@ -1,6 +1,6 @@
 import { Bean } from '../../model/bean';
 import { Store } from '@ngrx/store';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {LoginBean} from '../../model/login-bean';
 import {AuthService} from '../../services/auth.service';
 import * as fromRoot from '../../../store/reducers';
@@ -14,7 +14,8 @@ import { BeanPhone } from '../../model/bean-phone';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent implements OnInit, OnDestroy {
+  
   loginBean: LoginBean = new LoginBean();
   startLoading$: Observable<boolean>;
   errorMessage$: Observable<string>;
@@ -52,5 +53,9 @@ export class LoginFormComponent implements OnInit {
       console.log(bean);
       return bean;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.store.dispatch(new fromAuthActions.ResetErrorMessages());
   }
 }
