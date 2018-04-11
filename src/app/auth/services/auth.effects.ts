@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { AppResponse } from '../../model/app-response';
 import { Bean } from '../model/bean';
 import { AuthService } from './auth.service';
@@ -21,7 +21,13 @@ import { Relative } from '../model/relative';
 
 @Injectable()
 export class AuthEffects {
-    constructor(private actions$: Actions, private authService: AuthService, private router: Router) {
+    snapshot: ActivatedRouteSnapshot;
+    constructor(
+        private actions$: Actions,
+        private authService: AuthService,
+        private router: Router,
+        private route: ActivatedRoute) {
+            this.snapshot = this.route.snapshot;
     }
     @Effect()
     register$: Observable<Action> = this.actions$.pipe(
@@ -36,7 +42,10 @@ export class AuthEffects {
                 }
             }
             ),
-            catchError(err => of(new fromAuthActions.RegistrationFailed({message: 'Oops something happened! Please try again.'})))
+            catchError(err => {
+                console.log(err);
+                return of(new fromAuthActions.RegistrationFailed({message: 'Oops something happened! Please try again.'}));
+            })
         ))
     );
 
@@ -151,7 +160,10 @@ export class AuthEffects {
     @Effect({ dispatch: false })
     loginSuccessful: Observable<Action> = this.actions$.pipe(
         ofType(fromAuthActions.LOGIN_SUCCESSFUL),
-        tap(success => this.router.navigateByUrl('/user/dashboard'))
+        tap(success => {
+            const returnUrl = this.snapshot.queryParamMap.get('returnUrl');
+            returnUrl ? this.router.navigateByUrl(returnUrl) : this.router.navigateByUrl('/user/dashboard');
+        })
     );
     @Effect({ dispatch: false })
     logout: Observable<Action> = this.actions$.pipe(

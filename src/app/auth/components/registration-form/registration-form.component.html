@@ -210,6 +210,26 @@
           <!--</div>-->
         <!--</div>-->
         
+        <div class="form-group row">
+          <div class="col-lg-4 col-md-4">
+            <label for="dob">DOB</label>
+          </div>
+          <div class="col-md-8 col-lg-8">
+            <input type="date"
+                   class="form-control"
+                   id="dob"
+                   required
+                   name="dob"
+                   dateOfThePast
+                   ngModel
+                   #dob="ngModel"
+                   [(clrDate)] = "today">
+            <div class="text-danger" *ngIf="dob.invalid">
+              <div *ngIf="dob?.errors?.required && dob.touched">This field is required!</div>
+              <div *ngIf="dob?.errors?.dateOfThePast && today">Must be a proper date!</div>
+            </div>
+          </div>
+          </div>
 
         <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Register</button>
         <span class="spinner spinner-inline" *ngIf="startLoading$ | async">
@@ -226,6 +246,5 @@
     </form>
   </div>
 </div>
-
 
 

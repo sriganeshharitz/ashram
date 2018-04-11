@@ -10,9 +10,12 @@ import { FormsModule } from '@angular/forms';
 import { LogoutSuccessComponent } from './components/logout-success/logout-success.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { EditProfileSuccessComponent } from './components/edit-profile-success/edit-profile-success.component';
+import { ClarityModule } from '@clr/angular';
+import { DateOfThePastDirective } from './directives/date-of-the-past.directive';
 
 @NgModule({
   imports: [
+    ClarityModule,
     CommonModule,
     AuthRoutingModule,
     FormsModule,
@@ -25,7 +28,8 @@ import { EditProfileSuccessComponent } from './components/edit-profile-success/e
     RegistrationSuccessComponent,
     LogoutSuccessComponent,
     EditProfileComponent,
-    EditProfileSuccessComponent
+    EditProfileSuccessComponent,
+    DateOfThePastDirective
   ],
   exports: [
   ]
