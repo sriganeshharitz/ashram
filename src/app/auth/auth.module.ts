@@ -12,6 +12,8 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { EditProfileSuccessComponent } from './components/edit-profile-success/edit-profile-success.component';
 import { ClarityModule } from '@clr/angular';
 import { DateOfThePastDirective } from './directives/date-of-the-past.directive';
+import { RecaptchaModule } from 'ng-recaptcha';
+import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 
 @NgModule({
   imports: [
@@ -20,7 +22,9 @@ import { DateOfThePastDirective } from './directives/date-of-the-past.directive'
     AuthRoutingModule,
     FormsModule,
     CustomFormsModule,
-    MdComponentsModule
+    MdComponentsModule,
+    RecaptchaModule,
+    RecaptchaFormsModule
   ],
   declarations: [
     RegistrationFormComponent,

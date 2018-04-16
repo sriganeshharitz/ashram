@@ -25,6 +25,18 @@ const initialState: State = {
     token: localStorage.getItem('token')
 };
 
+function createAppUserFromResponse(data: any): AppUser {
+    return new AppUser(
+        data.email,
+        data.fname,
+        data.lname,
+        data.sbaId,
+        data.address,
+        data.mobileNum,
+        data.relativeList,
+        data.gender === 1 ? 'male' : 'female', new Date(data.dob));
+}
+
 export function authReducer(state: State = initialState, action: fromAuthActions.AuthActions): State {
     switch (action.type) {
         case fromAuthActions.ATTEMPT_REGISTRATION: {
@@ -67,15 +79,7 @@ export function authReducer(state: State = initialState, action: fromAuthActions
                 ...state,
                 startLoading: false,
                 loginErrorMessage: null,
-                user: new AppUser(
-                    action.payload.data.email,
-                    action.payload.data.fname,
-                    action.payload.data.lname,
-                    action.payload.data.sbaId,
-                    action.payload.data.address,
-                    action.payload.data.mobileNum,
-                    action.payload.data.relativeList,
-                    action.payload.data.gender === 1 ? 'male' : 'female', new Date(action.payload.data.dob))
+                user: createAppUserFromResponse(action.payload.data)
             };
         }
         case fromAuthActions.LOGIN_FAILED: {
@@ -102,15 +106,7 @@ export function authReducer(state: State = initialState, action: fromAuthActions
                 ...state,
                 startLoading: false,
                 editErrorMessage: null,
-                user: new AppUser(
-                    action.payload.data.email,
-                    action.payload.data.fname,
-                    action.payload.data.lname,
-                    action.payload.data.sbaId,
-                    action.payload.data.address,
-                    action.payload.data.mobileNum,
-                    action.payload.data.relativeList,
-                    action.payload.data.gender === 1 ? 'male' : 'female', new Date(action.payload.data.dob))
+                user: createAppUserFromResponse(action.payload.data)
             };
         }
         case fromAuthActions.EDIT_FAILED: {
@@ -141,10 +137,7 @@ export function authReducer(state: State = initialState, action: fromAuthActions
                 startLoading: false,
                 addRelativeErrorMessage: null,
                 addRelativeSuccessMessage: 'Added a relative',
-                user: {
-                    ...state.user,
-                    relatives: action.payload.data.relativeList
-                }
+                user: createAppUserFromResponse(action.payload.data)
             };
         }
         case fromAuthActions.RELATIVE_ADDITION_FAILED: {

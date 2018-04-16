@@ -58,17 +58,17 @@ export class AuthEffects {
                 if (response.body.status === 0) {
                     localStorage.setItem('token', response.body.message.split(' ')[1]);
                     const userBean = response.body.data;
-                    const user = new AppUser(
-                        userBean.email,
-                        userBean.fname,
-                        userBean.lname,
-                        userBean.sbaId,
-                        userBean.address,
-                        userBean.mobileNum,
-                        userBean.relativeList,
-                        userBean.gender === 1 ? 'male' : 'female',
-                        new Date(userBean.dob));
-                    localStorage.setItem('user', JSON.stringify(user));
+                    // const user = new AppUser(
+                    //     userBean.email,
+                    //     userBean.fname,
+                    //     userBean.lname,
+                    //     userBean.sbaId,
+                    //     userBean.address,
+                    //     userBean.mobileNum,
+                    //     userBean.relativeList,
+                    //     userBean.gender === 1 ? 'male' : 'female',
+                    //     new Date(userBean.dob));
+                    // localStorage.setItem('user', JSON.stringify(user));
                     return new fromAuthActions.LoginSuccessful(response.body);
                 } else {
                     console.log('login failed ' + response.body.message + response.headers.keys());
@@ -123,25 +123,47 @@ export class AuthEffects {
     editProfileSuccessful$: Observable<Action> = this.actions$.pipe(
         ofType(fromAuthActions.EDIT_SUCCESSFUL),
         tap((success: fromAuthActions.EditSuccessful) => {
-            const userBean = success.payload.data;
-                    const user = new AppUser(
-                        userBean.email,
-                        userBean.fname,
-                        userBean.lname,
-                        userBean.sbaId,
-                        userBean.address,
-                        userBean.mobileNum,
-                        userBean.relativeList,
-                        userBean.gender === 1 ? 'male' : 'female',
-                        new Date(userBean.dob));
-                    localStorage.setItem('user', JSON.stringify(user));
+            // const userBean = success.payload.data;
+            //         const user = new AppUser(
+            //             userBean.email,
+            //             userBean.fname,
+            //             userBean.lname,
+            //             userBean.sbaId,
+            //             userBean.address,
+            //             userBean.mobileNum,
+            //             userBean.relativeList,
+            //             userBean.gender === 1 ? 'male' : 'female',
+            //             new Date(userBean.dob));
+            //         localStorage.setItem('user', JSON.stringify(user));
             return this.router.navigateByUrl('/user/edit-success');
         })
     );
+    // @Effect({dispatch: false})
+    // addRelativeSuccessful$: Observable<Action> = this.actions$.pipe(
+    //     ofType(fromAuthActions.RELATIVE_ADDITION_SUCCESSFUL),
+    //     tap((success: fromAuthActions.RelativeAdditionSuccessful) => {
+    //         const userBean = success.payload.data;
+    //                 const user = new AppUser(
+    //                     userBean.email,
+    //                     userBean.fname,
+    //                     userBean.lname,
+    //                     userBean.sbaId,
+    //                     userBean.address,
+    //                     userBean.mobileNum,
+    //                     userBean.relativeList,
+    //                     userBean.gender === 1 ? 'male' : 'female',
+    //                     new Date(userBean.dob));
+    //                 localStorage.setItem('user', JSON.stringify(user));
+    //     })
+    // );
     @Effect({dispatch: false})
-    addRelativeSuccessful$: Observable<Action> = this.actions$.pipe(
-        ofType(fromAuthActions.RELATIVE_ADDITION_SUCCESSFUL),
-        tap((success: fromAuthActions.RelativeAdditionSuccessful) => {
+    persistUser$: Observable<Action> = this.actions$.pipe(
+        ofType(fromAuthActions.RELATIVE_ADDITION_SUCCESSFUL,
+            fromAuthActions.EDIT_SUCCESSFUL,
+            fromAuthActions.LOGIN_SUCCESSFUL),
+        tap((success: fromAuthActions.RelativeAdditionSuccessful|
+            fromAuthActions.EditSuccessful|
+            fromAuthActions.LoginSuccessful) => {
             const userBean = success.payload.data;
                     const user = new AppUser(
                         userBean.email,

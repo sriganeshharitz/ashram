@@ -25,6 +25,7 @@ import { UserComponent } from './components/user/user.component';
 import { RelativesComponent } from './components/relatives/relatives.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuardService } from './services/auth-guard.service';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -60,7 +61,8 @@ export function tokenGetter() {
           whitelistedDomains: ['122.166.225.182:9999']
         }
       }
-    )
+    ),
+    RecaptchaModule.forRoot()
   ],
   providers: [
     AuthService,

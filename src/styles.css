@@ -1,2 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+
+div.mat-input-infix.mat-form-field-infix {
+    padding-bottom: 0%;
+}
+div.mat-input-underline.mat-form-field-underline {
+    display: none;
+}

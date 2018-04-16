@@ -17,7 +17,14 @@ import { NgModel } from '@angular/forms/forms';
   templateUrl: './registration-form.component.html',
   styleUrls: ['./registration-form.component.css']
 })
-export class RegistrationFormComponent implements OnDestroy {
+export class RegistrationFormComponent implements OnDestroy, OnInit {
+  errorMessageSubscription: Subscription;
+  recaptcha;
+  options = [
+    'One',
+    'Two',
+    'Three'
+   ];
   today: Date;
   errorMessage$: Observable<string>;
   registeredSuccessfullySubscription: Subscription;
@@ -32,9 +39,8 @@ export class RegistrationFormComponent implements OnDestroy {
       (state: fromRoot.State) => state.auth.startLoading
     );
   }
-  register() {
-    console.log(this.today < new Date());
-    console.log('inside register ' + this.registerBean.dateOfBirth.getTime());
+  register(value) {
+    console.log(value);
     this.store.dispatch(
       new fromAuthActions.Register(
         new Bean(
@@ -47,8 +53,28 @@ export class RegistrationFormComponent implements OnDestroy {
           this.registerBean.gender === 'male' ? 1 : 0,
           this.today.getMilliseconds())));
   }
-
+  ngOnInit(): void {
+    this.errorMessageSubscription = this.errorMessage$.subscribe(
+      (error) => {
+        if (this.recaptcha) {
+          this.recaptcha.reset();
+        }
+      }
+    );
+  }
   ngOnDestroy(): void {
+    console.log('destroy');
     this.store.dispatch(new fromAuthActions.ResetErrorMessages());
+    if (this.errorMessageSubscription) {
+      this.errorMessageSubscription.unsubscribe();
+    }
+  }
+
+  resolved(event, captcha) {
+    this.recaptcha = captcha;
+  }
+  upload(files: FileList) {
+    const formData = new FormData();
+    formData.append('pic', files.item(0), files.item(0).name);
   }
 }
