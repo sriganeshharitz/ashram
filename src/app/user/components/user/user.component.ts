@@ -1,8 +1,9 @@
 import { Store } from '@ngrx/store';
-import { AppUser } from '../../auth/model/app-user';
+
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import * as fromRoot from '../../store/reducers';
+import * as fromRoot from '../../../store/reducers';
+import { AppUser } from '../../../auth/model/app-user';
 
 @Component({
   selector: 'app-user',

@@ -8,20 +8,16 @@ import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing.module';
 import { FormsModule } from '@angular/forms';
 import { LogoutSuccessComponent } from './components/logout-success/logout-success.component';
-import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
-import { EditProfileSuccessComponent } from './components/edit-profile-success/edit-profile-success.component';
 import { ClarityModule } from '@clr/angular';
 import { DateOfThePastDirective } from './directives/date-of-the-past.directive';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
+import { AuthService } from './services/auth.service';
+import { AuthGuardService } from '../services/auth-guard.service';
 
 @NgModule({
   imports: [
-    ClarityModule,
-    CommonModule,
     AuthRoutingModule,
-    FormsModule,
-    CustomFormsModule,
     MdComponentsModule,
     RecaptchaModule,
     RecaptchaFormsModule
@@ -31,9 +27,11 @@ import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
     LoginFormComponent,
     RegistrationSuccessComponent,
     LogoutSuccessComponent,
-    EditProfileComponent,
-    EditProfileSuccessComponent,
     DateOfThePastDirective
+  ],
+  providers: [
+    AuthService,
+    AuthGuardService,
   ],
   exports: [
   ]

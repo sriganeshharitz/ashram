@@ -1,12 +1,10 @@
-import { RegisterBean } from '../../model/register-bean';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AppUser } from '../../model/app-user';
 import * as fromRoot from '../../../store/reducers';
-import * as fromAuthActions from '../../store/auth-actions';
+import * as fromAuthActions from '../../../auth/store/auth-actions';
 import { Store } from '@ngrx/store';
-import { Bean } from '../../model/bean';
 import { Subscription } from 'rxjs/Subscription';
+import { AppUser } from '../../../auth/model/app-user';
 
 @Component({
   selector: 'app-edit-profile',

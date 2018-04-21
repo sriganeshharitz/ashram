@@ -1,10 +1,10 @@
-import { RegisterBean } from '../../auth/model/register-bean';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AppUser } from '../../auth/model/app-user';
-import * as fromRoot from '../../store/reducers';
-import * as fromAuthActions from '../../auth/store/auth-actions';
+import * as fromRoot from '../../../store/reducers';
+import * as fromAuthActions from '../../../auth/store/auth-actions';
 import { Store } from '@ngrx/store';
+import { RegisterBean } from '../../../auth/model/register-bean';
+import { AppUser } from '../../../auth/model/app-user';
 
 @Component({
   selector: 'app-relatives',
