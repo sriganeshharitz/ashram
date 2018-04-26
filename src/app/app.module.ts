@@ -19,6 +19,7 @@ import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { UserModule } from './user/user.module';
+import { FrontDeskModule } from './front-desk/front-desk.module';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -35,6 +36,7 @@ export function tokenGetter() {
   imports: [
     AuthModule,
     UserModule,
+    FrontDeskModule,
     BrowserModule,
     RouterModule.forRoot(ROUTES),
     BrowserAnimationsModule,

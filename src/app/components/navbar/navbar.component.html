@@ -7,9 +7,15 @@
       </a>
     </div>
     <div class="header-nav" [clr-nav-level]="1" *ngIf="!(user$ | async)">
-      <a routerLink="/register" class="nav-link" (click)="addActiveClass(register)" #register><span class="nav-text">Register</span></a>
-      <a routerLink="/login" class="nav-link" (click)="addActiveClass(login)" #login><span class="nav-text">Login</span></a>
+      <!-- <a routerLink="/register" class="nav-link" (click)="addActiveClass(register)" #register><span class="nav-text">Register</span></a>
+      <a routerLink="/login" class="nav-link" (click)="addActiveClass(login)" #login><span class="nav-text">Login</span></a> -->
+      <a routerLink="/user/create" class="nav-link" (click)="addActiveClass(createUser)" #createUser><span class="nav-text">Create User</span></a>
+      <a routerLink="/users" class="nav-link" (click)="addActiveClass(manageUsers)" #manageUsers><span class="nav-text">Manage Users</span></a>
     </div>
+
+    <!-- <div class="header-nav" [clr-nav-level]="1">
+      <a routerLink="/user/create" class="nav-link" (click)="addActiveClass(createUser)"  id="createUser"><span class="nav-test">Create User</span></a>
+    </div> -->
     <!-- <div class="header-actions" *ngIf="user$ | async as user">
       <clr-dropdown>
         <button class="nav-text" clrDropdownTrigger>

@@ -18,9 +18,7 @@ import { AuthGuardService } from '../services/auth-guard.service';
 @NgModule({
   imports: [
     AuthRoutingModule,
-    MdComponentsModule,
-    RecaptchaModule,
-    RecaptchaFormsModule
+    MdComponentsModule
   ],
   declarations: [
     RegistrationFormComponent,

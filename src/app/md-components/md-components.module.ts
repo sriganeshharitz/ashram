@@ -7,6 +7,8 @@ import { ClarityModule } from '@clr/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
+import { RecaptchaModule } from 'ng-recaptcha';
+import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 
 @NgModule({
   exports: [
@@ -18,7 +20,9 @@ import { CustomFormsModule } from 'ng2-validation';
     ClarityModule,
     CommonModule,
     FormsModule,
-    CustomFormsModule
+    CustomFormsModule,
+    RecaptchaModule,
+    RecaptchaFormsModule
   ]
 })
 export class MdComponentsModule { }
