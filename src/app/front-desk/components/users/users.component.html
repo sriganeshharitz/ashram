@@ -1,63 +1,29 @@
 <div class="row">
   <div class="col-md-6 col-lg-6 offset-md-3 offset-lg-3">
-    <form #form="ngForm">
-      <section class="form-block">
-
-          <div class="form-group row">
-              <div class="col-md-4 col-lg-4">
-                <label for="searchUserBy">Search user by</label>
-              </div>
-              <div class="col-md-8 col-lg-8">
-                <div class="select">
-                  <select id="searchUserBy">
-                      <option>First name</option>
-                      <option>Last name</option>
-                      <option>Email</option>
-                      <option>Phone number</option>
-                  </select>
-              </div>
-              </div>
-          </div>
-
-          <div class="form-group row">
-              <div class="col-lg-4 col-md-4">
-                <label for="searchKeyword">Enter the word to search</label>
-              </div>
-              <div class="col-md-8 col-lg-8">
-                <input type="text"
-                       class="form-control"
-                       id="searchKeyword"
-                       required
-                       name="searchKeyword"
-                       ngModel>
-              </div>
-          </div>
-
-          <button type="submit" class="btn btn-primary">Search</button>
-
-      </section>
-    </form>
+    <input type="text" id="search-box"> <button class="btn btn-outline">Search</button>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-6 col-lg-6 offset-md-3 offset-lg-3">
+  <div class="col-md-12 col-lg-12">
       <clr-datagrid>
+            <clr-dg-column>Photo</clr-dg-column>
           <clr-dg-column>First name</clr-dg-column>
           <clr-dg-column>Last name</clr-dg-column>
           <clr-dg-column>Date of Birth</clr-dg-column>
           <clr-dg-column>Phone number</clr-dg-column>
           <clr-dg-column>Email</clr-dg-column>
-          <clr-dg-column>Photo</clr-dg-column>
+          <clr-dg-column>Actions</clr-dg-column>
           
-         
-              <clr-dg-row *ngFor="let user of users" style="cursor: pointer;" (click)=open(user)>
+          
+              <clr-dg-row *ngFor="let user of users">
+                  <clr-dg-cell><img src="assets/images/{{user.photo}}" alt="" class="img-thumbnail"></clr-dg-cell>
                   <clr-dg-cell>{{user.firstName}}</clr-dg-cell>
                   <clr-dg-cell>{{user.lastName}}</clr-dg-cell>
                   <clr-dg-cell>{{user.dateOfBirth}}</clr-dg-cell>
                   <clr-dg-cell>{{user.phoneNumber}}</clr-dg-cell>
                   <clr-dg-cell>{{user.email}}</clr-dg-cell>
-                  <clr-dg-cell><img src="assets/images/{{user.photo}}" alt="" class="img-thumbnail"></clr-dg-cell>
+                  <clr-dg-cell><a routerLink="/user" class="btn btn-primary"><clr-icon shape="pencil" class="is-solid"></clr-icon></a> <button class="btn btn-danger" (click)="delete()"><clr-icon shape="trash" class="is-solid"></clr-icon></button></clr-dg-cell>
               </clr-dg-row>
           
       
@@ -66,39 +32,9 @@
   </div>  
 </div>
 
-<clr-modal [(clrModalOpen)]="selected">
-    <h3 class="modal-title">User Details <button class="btn btn-primary" (click)="edit()">Edit</button> <button class="btn btn-danger" (click)="delete()">Delete</button></h3>
-    <div class="modal-body">
-        <form *ngIf="selectedUser">
-          <section class="form-block">
-
-            <div>
-              <img src="assets/images/person.gif" alt="" class="img-thumbnail">
-            </div>
-            <div class="form-group">
-              <label for="firstName" class="text-primary">First name</label>
-              <input type="text" [readonly]="!editEnabled" id="firstName" [value]="selectedUser.firstName">
-            </div>
-
-            <div class="form-group">
-                <label for="lastName" class="text-primary">Last name</label>
-                <input type="text" [readonly]="!editEnabled" id="lastName" [value]="selectedUser.lastName">
-            </div>
-
-            <div class="form-group">
-                <label for="email" class="text-primary">Email</label>
-                <input type="email" [readonly]="!editEnabled" id="email" [value]="selectedUser.email">
-            </div>
-          </section>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline" (click)="selected = false">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="selected = false">Ok</button>
-    </div>
 
     
-</clr-modal>
+
 <clr-modal [(clrModalOpen)]="selectedForDelete">
     <h3 class="modal-title text-danger">Warning!</h3>
     <div class="modal-body">

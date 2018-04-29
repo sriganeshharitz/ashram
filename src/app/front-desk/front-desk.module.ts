@@ -5,12 +5,14 @@ import { CreateUserFormComponent } from './components/create-user-form/create-us
 import { FrontDeskRoutingModule } from './front-desk-routing.module';
 import { CreateUserSuccessComponent } from './components/create-user-success/create-user-success.component';
 import { UsersComponent } from './components/users/users.component';
+import { UserComponent } from './components/user/user.component';
+
 
 @NgModule({
   imports: [
     MdComponentsModule,
     FrontDeskRoutingModule
   ],
-  declarations: [CreateUserFormComponent, CreateUserSuccessComponent, UsersComponent]
+  declarations: [CreateUserFormComponent, CreateUserSuccessComponent, UsersComponent, UserComponent]
 })
 export class FrontDeskModule { }

@@ -1,0 +1,566 @@
+
+
+<div class="row">
+    <div class="col-md-6 col-lg-6 offset-md-3 offset-lg-3">
+      <form #form="ngForm" (ngSubmit) = "register(form.value)">
+        <section class="form-block">
+          <label class="text-primary">Arrival and Departure Details</label>
+          <clr-datagrid class="mt-0">
+              <clr-dg-column>Sl</clr-dg-column>
+              <clr-dg-column>Date of arrival</clr-dg-column>
+              <clr-dg-column>Date of departure</clr-dg-column>
+          
+              <clr-dg-row *ngFor="let date of dates; let i = index">
+                  <clr-dg-cell>{{i+1}}</clr-dg-cell>
+                  <clr-dg-cell>{{date.arrival}}</clr-dg-cell>
+                  <clr-dg-cell>{{date.departure}}</clr-dg-cell>
+              </clr-dg-row>
+          
+              <clr-dg-footer>{{dates.length}} entries</clr-dg-footer>
+          </clr-datagrid>
+
+          <div class="form-group row">
+              <div class="col-lg-4 col-md-4">
+                <label for="arrival">Date of arrival</label>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <input type="date"
+                       class="form-control"
+                       id="arrival"
+                       required
+                       name="arrival"
+                       dateOfThePast
+                       ngModel
+                       clrDate>
+              </div>
+          </div>
+          <div class="form-group row">
+                <div class="col-lg-4 col-md-4">
+                  <label for="departure">Date of departure</label>
+                </div>
+                <div class="col-md-8 col-lg-8">
+                  <input type="date"
+                         class="form-control"
+                         id="departure"
+                         required
+                         name="departure"
+                         dateOfThePast
+                         ngModel
+                         clrDate>
+                </div>
+          </div>
+
+          <label class="text-primary mt-2">Personal Account Details</label>
+
+          <div class="row mb-2">
+            <img src="assets/images/person.gif" alt="">
+          </div>
+          <div class="form-group row">
+              <div class="col-lg-4 col-md-4">
+                <label for="firstName">Change Photo</label>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <input type="file"
+                       class="form-control"
+                       placeholder="John"
+                       id="photo"
+                       required
+                       name="photo"
+                       ngModel
+                       #photo = "ngModel">
+              </div>
+            </div>
+          <div class="form-group row">
+            <div class="col-lg-4 col-md-4">
+              <label for="firstName">First name</label>
+            </div>
+            <div class="col-md-8 col-lg-8">
+              <input type="text"
+                     class="form-control"
+                     id="firstName"
+                     required
+                     name="firstName"
+                     ngModel
+                     #firstName = "ngModel">
+              <span class="text-danger" *ngIf="firstName.touched && firstName.invalid">
+              This field cannot be empty!
+              </span>
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <div class="col-lg-4 col-md-4">
+              <label for="firstName">Middle name</label>
+            </div>
+            <div class="col-md-8 col-lg-8">
+              <input type="text"
+                     class="form-control"
+                     id="middleName"
+                     required
+                     name="middleName"
+                     ngModel
+                     #middleName = "ngModel">
+              <span class="text-danger" *ngIf="middleName.touched && middleName.invalid">
+              This field cannot be empty!
+              </span>
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <div class="col-lg-4 col-md-4">
+              <label for="firstName">Last name</label>
+            </div>
+            <div class="col-md-8 col-lg-8">
+              <input type="text"
+                     class="form-control"
+                     id="lastName"
+                     required
+                     name="lastName"
+                     ngModel
+                     #lastName = "ngModel">
+              <span class="text-danger" *ngIf="lastName.touched && lastName.invalid">
+              This field cannot be empty!
+              </span>
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <div class="col-lg-4 col-md-4">
+              <label for="dob">Date of birth</label>
+            </div>
+            <div class="col-md-8 col-lg-8">
+              <input type="date"
+                     class="form-control"
+                     id="dob"
+                     required
+                     name="dob"
+                     dateOfThePast
+                     ngModel
+                     clrDate>
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <div class="col-md-4 col-lg-4">
+              <label>Gender</label>
+            </div>
+            <div class="col-md-8 col-lg-8">
+              <div class="radio-inline">
+                <input type="radio" name="gender" id="male" checked value="male">
+                <label for="male">Male</label>
+              </div>
+              <div class="radio-inline">
+                <input type="radio" name="gender" id="female" value="female">
+                <label for="female">Female</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <div class="col-md-4 col-lg-4">
+              <label for="maritalStatus">Marital status</label>
+            </div>
+            <div class="col-md-8 col-lg-8">
+              <div class="select">
+                <select id="maritalStatus">
+                    <option>Single</option>
+                    <option>Married</option>
+                </select>
+            </div>
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <div class="col-md-4 col-lg-4">
+              <label for="nationality">Nationality</label>
+            </div>
+            <div class="col-md-8 col-lg-8">
+              <div class="select">
+                <select id="nationality">
+                    <option>India</option>
+                    <option>USA</option>
+                </select>
+            </div>
+            </div>
+          </div>
+  
+          
+          <div class="row">
+            <img src="assets/images/aadhar.jpg" alt="">
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4 col-lg-4">
+              <label for="idProofType">ID Proof Type</label>
+            </div>
+            <div class="col-md-8 col-lg-8">
+              <div class="select">
+                <select id="idProofType">
+                    <option>Aadhar</option>
+                    <option>License</option>
+                    <option>Passport</option>
+                </select>
+            </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-lg-4 col-md-4">
+              <label for="firstName">ID Proof</label>
+            </div>
+            <div class="col-md-8 col-lg-8">
+              <input type="file"
+                     class="form-control"
+                     placeholder="John"
+                     id="idProof"
+                     required
+                     name="idProof"
+                     ngModel
+                     #idProof = "ngModel">
+            </div>
+          </div>
+  
+          <!-- <div class="form-group row">
+            <div class="col-md-4 col-lg-4">
+              <label for="password">Enter Password</label>
+            </div>
+            <div class="col-md-8 col-lg-8">
+              <input type="password"
+                     class="form-control"
+                     id="password"
+                     placeholder="Minimum 6 characters"
+                     required
+                     name="password"
+                     ngModel
+                     #password = "ngModel"
+                     minlength="6">
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <div class="col-md-4 col-lg-4">
+              <label for="confirmPassword">Confirm password</label>
+            </div>
+            <div class="col-md-8 col-lg-8">
+              <input type="password"
+                     class="form-control"
+                     id="confirmPassword"
+                     required name="confirmPassword"
+                     ngModel
+                     #confirmPassword = "ngModel" [equalTo]="password">
+            </div>
+          </div> -->
+          <div class="row">
+            <br>
+          </div>
+          <label class="text-primary">Contact Information</label>
+  
+          <div class="form-group row">
+              <div class="col-md-4 col-lg-4">
+                <label for="isdCode">ISD Code</label>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <div class="select">
+                  <select id="isdCode">
+                      <option>91</option>
+                      <option>2</option>
+                  </select>
+              </div>
+              </div>
+          </div>
+  
+          <div class="form-group row">
+              <div class="col-lg-4 col-md-4">
+                <label for="phoneNumber">Phone Number</label>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <input type="tel"
+                       class="form-control"
+                       id="phoneNumber"
+                       required
+                       name="phoneNumber"
+                       ngModel>
+              </div>
+          </div>
+  
+          <div class="form-group row">
+              <div class="col-lg-4 col-md-4">
+                <label for="email">Email</label>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <input type="email"
+                       class="form-control"
+                       id="email"
+                       required
+                       name="email"
+                       ngModel>
+              </div>
+          </div>
+  
+          <div class="form-group row">
+              <div class="col-lg-4 col-md-4">
+                <label for="houseNumber">House Number</label>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <input type="text"
+                       class="form-control"
+                       id="houseNumber"
+                       required
+                       name="houseNumber"
+                       ngModel>
+              </div>
+          </div>
+  
+          <div class="form-group row">
+              <div class="col-lg-4 col-md-4">
+                <label for="street">Street</label>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <input type="text"
+                       class="form-control"
+                       id="street"
+                       required
+                       name="street"
+                       ngModel>
+              </div>
+          </div>
+  
+          <div class="form-group row">
+              <div class="col-lg-4 col-md-4">
+                <label for="area">Area</label>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <input type="text"
+                       class="form-control"
+                       id="area"
+                       required
+                       name="area"
+                       ngModel>
+              </div>
+          </div>
+  
+          <div class="form-group row">
+              <div class="col-md-4 col-lg-4">
+                <label for="city">City</label>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <div class="select">
+                  <select id="city">
+                      <option>Bangalore</option>
+                      <option>Mysore</option>
+                  </select>
+              </div>
+              </div>
+            </div>
+  
+            <div class="form-group row">
+                <div class="col-md-4 col-lg-4">
+                  <label for="state">State</label>
+                </div>
+                <div class="col-md-8 col-lg-8">
+                  <div class="select">
+                    <select id="state">
+                        <option>Karnataka</option>
+                        <option>Delhi</option>
+                    </select>
+                </div>
+                </div>
+              </div>
+  
+          <div class="form-group row">
+              <div class="col-lg-4 col-md-4">
+                <label for="pin">PIN</label>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <input type="text"
+                       class="form-control"
+                       id="pin"
+                       required
+                       name="pin"
+                       ngModel>
+              </div>
+          </div>
+  
+          <div class="form-group row">
+              <div class="col-md-4 col-lg-4">
+                <label for="country">Country</label>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <div class="select">
+                  <select id="country">
+                      <option>India</option>
+                      <option>USA</option>
+                  </select>
+              </div>
+              </div>
+            </div>
+          
+          <br>
+          <label class="text-primary">Professional Details</label>
+  
+          <div class="form-group row">
+            <div class="col-md-4 col-lg-4">
+              <label for="profession">Profession</label>
+            </div>
+            <div class="col-md-8 col-lg-8">
+              <div class="select">
+                <select id="profession" #profession (change)="onChange(profession)">
+                    <option>Engineer</option>
+                    <option>Medical Practitioner</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            </div>
+          </div>
+        
+          <div class="form-group row" *ngIf="profession.value === 'Medical Practitioner'">
+            <div class="col-md-4 col-lg-4">
+              <label for="medicalSpecialization">Medical Specialization</label>
+            </div>
+            <div class="col-md-8 col-lg-8">
+              <div class="select">
+                <select id="medicalSpecialization">
+                    <option>Cardiologist</option>
+                    <option>Orthopaedist</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            </div>
+          </div>
+  
+          <div class="form-group row" *ngIf="profession.value === 'Medical Practitioner'">
+            <div class="col-lg-4 col-md-4">
+              <label for="degree">Medical / Health Care Extender Degree</label>
+            </div>
+            <div class="col-md-8 col-lg-8">
+              <input type="text"
+                     class="form-control"
+                     placeholder="John"
+                     id="degree"
+                     required
+                     name="degree"
+                     ngModel
+                     #degree = "ngModel">
+            </div>
+          </div>
+  
+          <div class="form-group row" *ngIf="profession.value === 'Medical Practitioner'">
+              <div class="col-md-4 col-lg-4">
+                <label>Are you willing to take up medical seva in dispensary or hospital?</label>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <div class="radio-inline">
+                  <input type="radio" name="medicalSeva" id="yes"  value="yes">
+                  <label for="yes">Yes</label>
+                </div>
+                <div class="radio-inline">
+                  <input type="radio" name="medicalSeva" id="no" value="no">
+                  <label for="no">No</label>
+                </div>
+              </div>
+            </div>
+          
+          <br>
+          <label class="text-primary">Seva Preference</label>
+  
+          <div class="form-group row">
+              <div class="col-md-4 col-lg-4">
+                <label>Are you interested in taking up seva activities?</label>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <div class="radio-inline">
+                  <input type="radio" name="sevaPreference" id="interested" value="yes" [(ngModel)]="sevaPreference">
+                  <label for="interested">Yes</label>
+                </div>
+                <div class="radio-inline">
+                  <input type="radio" name="sevaPreference" id="notInterested" value="no" [(ngModel)]="sevaPreference">
+                  <label for="notInterested">No</label>
+                </div>
+              </div>
+          </div>
+  
+          <div class="form-group row" *ngIf="sevaPreference === 'yes'">
+              <div class="col-md-4 col-lg-4">
+                <label for="seaveCategory">Seva Category</label>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <div class="select">
+                  <select id="seaveCategory">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>Other</option>
+                  </select>
+              </div>
+              </div>
+          </div>
+  
+          <div class="form-group row">
+              <div class="col-lg-4 col-md-4">
+                <label for="expertise">Do you have any expertise that could benefit Ashram activities?</label>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <input type="text"
+                       class="form-control"
+                       id="expertise"
+                       required
+                       name="expertise"
+                       ngModel>
+              </div>
+          </div>
+  
+          <br>
+          <label class="text-primary">Misc</label>
+  
+          <div class="form-group row">
+              <div class="col-md-4 col-lg-4">
+                <label>Do you want to be notified of events?</label>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <div class="radio-inline">
+                  <input type="radio" name="isNotifiedOfEvents" id="isNotifiedOfEvents" value="yes">
+                  <label for="isNotifiedOfEvents">Yes</label>
+                </div>
+                <div class="radio-inline">
+                  <input type="radio" name="isNotifiedOfEvents" id="isNotNotifiedOfEvents" value="no">
+                  <label for="isNotNotifiedOfEvents">No</label>
+                </div>
+              </div>
+          </div>
+  
+          <div class="form-group row">
+              <div class="col-md-4 col-lg-4">
+                <label>Are you a registered Black Lotus user?</label>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <div class="radio-inline">
+                  <input type="radio" name="isBlackLotusUser" id="isABlackLotusUser" value="yes" [(ngModel)]="isBlackLotusUser">
+                  <label for="isABlackLotusUser">Yes</label>
+                </div>
+                <div class="radio-inline">
+                  <input type="radio" name="isNotABlackLotusUser" id="isNotABlackLotusUser" value="no" [(ngModel)]="isBlackLotusUser">
+                  <label for="isNotABlackLotusUser">No</label>
+                </div>
+              </div>
+          </div>
+  
+          <div class="form-group row" *ngIf="isBlackLotusUser === 'yes'">
+              <div class="col-lg-4 col-md-4">
+                <label for="backLotusEmail">Enter your Email ID registered on Black Lotus</label>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <input type="email"
+                       class="form-control"
+                       id="backLotusEmail"
+                       required
+                       name="backLotusEmail"
+                       ngModel>
+              </div>
+          </div>
+  
+          <button type="submit" class="btn btn-success">Save</button>
+        </section>
+      </form>
+    </div>
+  </div>
+  
+  
+  
